@@ -1,0 +1,12 @@
+{
+  "name": "@arted/barcode",
+  "version": "0.0.1",
+  "description": "barcode scanner for H5",
+  "main": "lib/index.js",
+  "repository": "git@github.com:edonet/barcode.git",
+  "author": "edonet <edonet@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@zxing/library": "^0.8.4"
+  }
+}
