@@ -20,4 +20,16 @@ import * as barcode from '../lib';
  * 启动二维码扫描
  *****************************************
  */
-barcode.scanner();
+async function run() {
+    let scanner = await barcode.scanner();
+
+    scanner.start();
+}
+
+
+/**
+ *****************************************
+ * 运行
+ *****************************************
+ */
+run();
