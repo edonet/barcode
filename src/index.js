@@ -12,24 +12,14 @@
  * 加载依赖
  *****************************************
  */
-import * as barcode from '../lib';
+import React from 'react';
+import { render } from 'react-dom';
+import App from './App';
 
 
 /**
  *****************************************
- * 启动二维码扫描
+ * 加载依赖
  *****************************************
  */
-async function run() {
-    let scanner = await barcode.scanner();
-
-    scanner.start();
-}
-
-
-/**
- *****************************************
- * 运行
- *****************************************
- */
-run();
+render(<App />, document.getElementById('app'));
