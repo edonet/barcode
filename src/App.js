@@ -13,8 +13,9 @@
  *****************************************
  */
 import React, { Component } from 'react';
-import { Scanner } from '../lib';
+import * as barcode from '../lib';
 
+console.log(barcode);
 
 /**
  *****************************************
@@ -29,7 +30,7 @@ export default class App extends Component {
 
         // 定义属性
         this.state = { result: '' };
-        this.scanner = new Scanner();
+        this.scanner = new barcode.Scanner();
 
         // 绑定回调
         this.startScanning = this.startScanning.bind(this);
