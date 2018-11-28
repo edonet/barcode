@@ -7,6 +7,7 @@
   "author": "edonet <edonet@163.com>",
   "license": "MIT",
   "dependencies": {
-    "@zxing/library": "^0.8.4"
+    "@zxing/library": "^0.8.4",
+    "xtil": "^0.0.104"
   }
 }

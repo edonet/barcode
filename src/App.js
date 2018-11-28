@@ -12,7 +12,7 @@
  * 加载依赖
  *****************************************
  */
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import * as barcode from '../lib';
 
 console.log(barcode);
@@ -29,21 +29,34 @@ export default class App extends Component {
         super(props, ...args);
 
         // 定义属性
+        this.ref = createRef();
         this.state = { result: '' };
+        this.qrcode = new barcode.QRCode();
         this.scanner = new barcode.Scanner();
 
         // 绑定回调
+        this.handleInput = this.handleInput.bind(this);
         this.startScanning = this.startScanning.bind(this);
+        this.saveAs = () => this.qrcode.saveAs();
     }
 
     /* 渲染组件 */
     render() {
         return (
             <div>
-                <button onClick={ this.startScanning }>start</button>
-                <p>{ this.state.result }</p>
+                <p>
+                    <button onClick={ this.startScanning }>scan</button>
+                    <button onClick={ this.saveAs }>save</button>
+                </p>
+                <textarea value={ this.state.result } onChange={ this.handleInput }></textarea>
+                <p ref={ this.ref } />
             </div>
         );
+    }
+
+    /* 组件加载完成 */
+    componentDidMount() {
+        this.qrcode.appendTo(this.ref.current);
     }
 
     /* 开始扫描 */
@@ -53,5 +66,14 @@ export default class App extends Component {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    /* 监听文本输入 */
+    handleInput(event) {
+        let result = event.target.value;
+
+        // 更新二维码
+        this.qrcode.render(result);
+        this.setState({ result });
     }
 }
