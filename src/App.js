@@ -35,20 +35,25 @@ export default class App extends Component {
         this.scanner = new barcode.Scanner();
 
         // 绑定回调
-        this.handleInput = this.handleInput.bind(this);
         this.startScanning = this.startScanning.bind(this);
+        this.handleInput = event => this.setState({ result: event.target.value });
         this.saveAs = () => this.qrcode.saveAs();
     }
 
     /* 渲染组件 */
     render() {
+
+        // 更新二维码
+        this.qrcode.render(this.state.result);
+
+        // 返回元素
         return (
             <div>
                 <p>
                     <button onClick={ this.startScanning }>scan</button>
                     <button onClick={ this.saveAs }>save</button>
                 </p>
-                <textarea value={ this.state.result } onChange={ this.handleInput }></textarea>
+                <textarea value={ this.state.result } onChange={ this.handleInput } />
                 <p ref={ this.ref } />
             </div>
         );
@@ -66,14 +71,5 @@ export default class App extends Component {
         } catch (err) {
             console.error(err);
         }
-    }
-
-    /* 监听文本输入 */
-    handleInput(event) {
-        let result = event.target.value;
-
-        // 更新二维码
-        this.qrcode.render(result);
-        this.setState({ result });
     }
 }
